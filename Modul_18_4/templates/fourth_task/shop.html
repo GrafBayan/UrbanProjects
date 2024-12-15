@@ -1,0 +1,26 @@
+{% extends 'fourth_task/menu.html' %}
+
+{% block pagename %}Магазин настолок{% endblock %}
+{% block page_title %}Магазин настолок{% endblock %}
+
+{% block content %}
+<h2>Доступные настолки</h2>
+<ul>
+    {% for game in games %}
+        <li>
+            {{ game }}
+            <form method="POST" style="display:inline;">
+                {% csrf_token %}
+                <input type="hidden" name="game_name" value="{{ game }}">
+                <button type="submit">Купить</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+<h3>Корзина</h3>
+<ul>
+    {% for item, quantity in cart_items.items %}
+        <li>{{ item }}: {{ quantity }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
