@@ -1,0 +1,22 @@
+python manage.py shell
+
+from task1.models import Buyer, Game
+from decimal import Decimal
+
+buyer1 = Buyer.objects.create(name="Alice Johnson", balance=Decimal('50.00'), age=17)
+buyer2 = Buyer.objects.create(name="Bob Smith", balance=Decimal('100.00'), age=25)
+buyer3 = Buyer.objects.create(name="Charlie Brown", balance=Decimal('150.00'), age=30)
+
+
+game1 = Game.objects.create(title="Adventure Quest", cost=Decimal('29.99'), size=Decimal('2.5'), 
+                             description="An exciting adventure game suitable for all ages.", age_limited=False)
+game2 = Game.objects.create(title="Mature Combat", cost=Decimal('49.99'), size=Decimal('15.0'), 
+                             description="A thrilling combat game for mature audiences.", age_limited=True)
+game3 = Game.objects.create(title="Puzzle Mania", cost=Decimal('19.99'), size=Decimal('1.0'), 
+                             description="A fun puzzle game suitable for everyone.", age_limited=False)
+
+game1.buyers.set([buyer2])
+game2.buyers.set([buyer2])
+game3.buyers.set([buyer2])
+game1.buyers.add(buyer1)
+game3.buyers.add(buyer1)
